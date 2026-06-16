@@ -1,0 +1,101 @@
+<h2>Register</h2>
+
+<form
+    [formGroup]="registerForm"
+    (ngSubmit)="register()">
+<input
+  type="text"
+  placeholder="Username"
+  formControlName="username">
+    @if(registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched){
+    Username is required
+    }
+
+    @if(registerForm.get('username')?.hasError('minlength')){
+    Username must be at least 3 characters
+    }
+    @if(registerForm.get('username')?.hasError('maxlength')){
+    Username should not exceed 20 characters
+    }
+  
+
+<br><br>
+
+<input
+  type="password"
+  placeholder="Password"
+  formControlName="password">
+    @if(registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched){
+    Password is required
+    }
+
+    @if(registerForm.get('password')?.hasError('minlength')){
+    Password must be at least 6 characters
+    }
+    @if(registerForm.get('password')?.hasError('maxlength')){
+    Password should not exceed 20 characters
+    }
+
+<br><br>
+
+<input
+  type="text"
+  placeholder="First Name"
+  formControlName="firstName">
+    @if(registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched){
+    First Name is required
+    }
+
+    @if(registerForm.get('firstName')?.hasError('minlength')){
+    First Name must be at least 6 characters
+    }
+    @if(registerForm.get('firstName')?.hasError('maxlength')){
+    First Name should not exceed 30 characters
+    }
+
+<br><br>
+
+<input
+  type="text"
+  placeholder="Last Name"
+  formControlName="lastName">
+    @if(registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched){
+    Last Name is required
+    }
+
+<br><br>
+
+<input
+  type="email"
+  placeholder="Email"
+  formControlName="email">
+    @if(registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched){
+    Email is required
+    }
+    @if(registerForm.get('email')?.hasError('email')) { Invalif Email Formate }
+
+
+<br><br>
+
+<select formControlName="lob">
+
+    <option value="">
+        Select LOB
+    </option>
+    @for (item of lobs; track item) {
+        <option [value]="item">{{ item }}</option>
+    }
+
+</select> 
+<br><br>
+<button
+  type="submit"
+  [disabled]="registerForm.invalid">
+
+    Register
+
+</button>
+</form>
+
+
+
