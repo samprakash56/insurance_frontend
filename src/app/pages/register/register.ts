@@ -1,5 +1,6 @@
 import { Component,inject } from '@angular/core';
 import {ReactiveFormsModule,FormBuilder,FormGroup,Validators} from '@angular/forms';
+import { RegisterRequest } from '../../models/register-request';
 
 
 @Component({
@@ -11,6 +12,12 @@ import {ReactiveFormsModule,FormBuilder,FormGroup,Validators} from '@angular/for
 export class Register {
 
   private fb = inject(FormBuilder);
+  lobs=[
+    'L70',
+    'LCOMM',
+    'CAPS',
+    'EOC'
+  ]
 
   registerForm: FormGroup = 
   this.fb.group({
@@ -48,14 +55,10 @@ export class Register {
     ]
   })
   register(){
-    console.log(this.registerForm.value);
+    const response : RegisterRequest = this.registerForm.value as RegisterRequest;
+        console.log(response);
   }
 
-  lobs=[
-    'L70',
-    'LCOMM',
-    'CAPS',
-    'EOC'
-  ]
+  
   
 }

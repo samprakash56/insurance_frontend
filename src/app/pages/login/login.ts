@@ -1,6 +1,6 @@
 import { Component,inject } from '@angular/core';
-import {ReactiveFormsModule,FormBuilder,FormGroup,Validators, FormsModule} from '@angular/forms';
-
+import {ReactiveFormsModule,FormBuilder,FormGroup,Validators} from '@angular/forms';
+import { LoginRequest } from '../../models/login-requests';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,8 @@ export class Login {
   }) 
 
   login(){
-    console.log(this.loginForm.value)
+    const response : LoginRequest = this.loginForm.value as LoginRequest;
+    console.log(response);
   }
 
 }
