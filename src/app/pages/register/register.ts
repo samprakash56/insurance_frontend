@@ -1,6 +1,7 @@
 import { Component,inject } from '@angular/core';
 import {ReactiveFormsModule,FormBuilder,FormGroup,Validators} from '@angular/forms';
-import { RegisterRequest } from '../../models/register-request';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -12,12 +13,17 @@ import { RegisterRequest } from '../../models/register-request';
 export class Register {
 
   private fb = inject(FormBuilder);
+  private router = inject(Router);
   lobs=[
     'L70',
     'LCOMM',
     'CAPS',
     'EOC'
   ]
+
+  constructor(private authService: AuthService){
+  
+  }
 
   registerForm: FormGroup = 
   this.fb.group({
@@ -55,8 +61,29 @@ export class Register {
     ]
   })
   register(){
-    const response : RegisterRequest = this.registerForm.value as RegisterRequest;
-        console.log(response);
+      if(this.registerForm.invalid){
+      return;
+    }
+      this.authService.register(this.registerForm.value)
+      .subscribe({
+        next:(response)=>{
+          console.log(response)
+          alert(response.message)
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
+
+
+        },
+        error: error => {
+        if(error.error?.message){
+          alert(error.error.message)
+        }
+        else{
+          alert("Registration Failed")
+        }
+      }
+    })
   }
 
   

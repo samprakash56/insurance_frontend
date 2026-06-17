@@ -1,17 +1,22 @@
 .container {
     text-align: center;
-    margin-top: 100px;
-    background-color: bisque;
+    background-color: rgb(117, 230, 238);
+    padding : 40px;
+    border-color:   antiquewhite;
+    border-radius: 15px;
+
 }
 
 .buttons {
     margin-top: 20px;
+    padding: 10px;
+    margin: 10px;
+    background-color: beige;
+    width: 70px;
+    border-radius: 15px;
 }
 
-.buttons a {
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid black;
-    text-decoration: none;
-}
+
+
+
 
