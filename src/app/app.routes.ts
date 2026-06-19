@@ -4,6 +4,7 @@ import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { authGuard } from './guards/auth.guard-guard';
 
 export const routes: Routes = [
     {
@@ -20,7 +21,8 @@ export const routes: Routes = [
     },
     {
         path:"dashboard",
-        component:Dashboard
+        component:Dashboard,
+        canActivate:[authGuard]
     }
 
 

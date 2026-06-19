@@ -1,6 +1,8 @@
 import { Component,inject } from '@angular/core';
 import {ReactiveFormsModule,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { LoginRequest } from '../../models/login-requests';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +13,9 @@ import { LoginRequest } from '../../models/login-requests';
 export class Login {
   
   private fb = inject(FormBuilder)
+  private router = inject(Router)
+
+  constructor(private authService: AuthService){}
 
   loginForm : FormGroup =
   this.fb.group({
@@ -27,8 +32,51 @@ export class Login {
   }) 
 
   login(){
-    const response : LoginRequest = this.loginForm.value as LoginRequest;
-    console.log(response);
-  }
+
+  const request: LoginRequest =
+    this.loginForm.value as LoginRequest;
+
+  this.authService.login(request)
+    .subscribe({
+
+      next: (response) => {
+
+        console.log(response);
+
+        localStorage.setItem(
+          'token',
+          response.token
+        );
+
+        localStorage.setItem(
+          'username',
+          response.username
+        );
+
+        localStorage.setItem(
+          'role',
+          response.role
+        );
+
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1000);
+
+      },
+
+      error: error => {
+
+        if(error.error?.message){
+          alert(error.error.message);
+        }
+        else{
+          alert('Login Failed');
+        }
+
+      }
+
+    });
+
+}
 
 }

@@ -1,1 +1,29 @@
-<p>dashboard works!</p>
+<h2>Dashboard</h2>
+
+<p>Welcome {{username}}</p>
+
+<p>Role : {{role}}</p>
+
+<button (click)="logout()">
+    Logout
+</button>
+
+<div class="productdetails">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Premium</th>
+        </tr>
+
+        <tr *ngFor="let item of products">
+            <td>{{item.id}}</td>
+            <td>{{item.productCode}}</td>
+            <td>{{item.productName}}</td>
+            <td>{{item.premium}}</td>
+        </tr>
+
+    </table>
+
+</div>

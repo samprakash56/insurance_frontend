@@ -2,6 +2,7 @@ import { Component,inject } from '@angular/core';
 import {ReactiveFormsModule,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { RegisterRequest } from '../../models/register-request';
 
 
 @Component({
@@ -22,7 +23,6 @@ export class Register {
   ]
 
   constructor(private authService: AuthService){
-  
   }
 
   registerForm: FormGroup = 
@@ -64,7 +64,7 @@ export class Register {
       if(this.registerForm.invalid){
       return;
     }
-      this.authService.register(this.registerForm.value)
+      this.authService.register(this.registerForm.value as RegisterRequest)
       .subscribe({
         next:(response)=>{
           console.log(response)
@@ -85,7 +85,4 @@ export class Register {
       }
     })
   }
-
-  
-  
 }
